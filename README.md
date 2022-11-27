@@ -50,17 +50,13 @@ application lifecycle of IoT solutions
       </ul>
     </li>
     <li>
-      <a href="#getting-started">Getting Started</a>
+      <a href="#requirements-for-the-project">Requirements for the project</a>
       <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#installation">Installation</a></li>
+        <li><a href="#github-requirements">GitHub Requirements</a></li>
+        <li><a href="#application-requirements">Application Requirements</a></li>
+        <li><a href="#docker-requiremnets">Docker Requirements</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
-    <li><a href="#roadmap">Roadmap</a></li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#license">License</a></li>
-    <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
 </details>
@@ -85,7 +81,7 @@ DevOps platform to plan and implement a concrete IoT application example. This p
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Requirements for the project.
+## Requirements for the project
 
 * Define a team-oriented, integrated process improvement approach to software
 development and operations (DevOps) and implement DevOps methods
@@ -159,16 +155,6 @@ IoT application example on it
          * flask --debug run --host=0.0.0.0
    * production
        * will start Flask server without debug mode
-
-
-<!-- CONTACT -->
-## Contact
-
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
-
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
 
