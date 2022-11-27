@@ -103,11 +103,11 @@ IoT application example on it
 	* feature branch
 		* Build docker test stage
     * develop
-        * Build docker test stage
-        * Build and push dev image to DockerHub (only on push)
+     * Build docker test stage
+      * Build and push dev image to DockerHub (only on push)
     * main/master
-        * Build docker test stage
-        * Build and push prod image to DockerHub (only on push)
+     * Build docker test stage
+      * Build and push prod image to DockerHub (only on push)
 
         
 ### Application Requirements
@@ -124,17 +124,17 @@ IoT application example on it
        * /cpu/temp/error: Return "too hot" if the temperature is over 60 degree Celsius, else return "fine"
        * /disk/usage: Current disk usage in percent
 * Write unit and integration tests
-       * https://docs.pytest.org/en/latest/
-       * https://flask.palletsprojects.com/en/2.2.x/testing/
-       * Unit tests are marked as such
-       * Integration test are marked as such
-           * https://docs.pytest.org/en/7.1.x/example/markers.html
-           * https://docs.pytest.org/en/7.1.x/how-to/mark.html
-       * Mock external libraries for testing
-           * https://changhsinlee.com/pytest-mock/
-           * https://nedbatchelder.com/blog/201908/why_your_mock_doesnt_work.html
-        * At least 80% coverage
-            https://coverage.readthedocs.io/en/6.4.2/
+	* https://docs.pytest.org/en/latest/
+	* https://flask.palletsprojects.com/en/2.2.x/testing/
+	* Unit tests are marked as such
+	* Integration test are marked as such
+		* https://docs.pytest.org/en/7.1.x/example/markers.html
+		* https://docs.pytest.org/en/7.1.x/how-to/mark.html
+	* Mock external libraries for testing
+		* https://changhsinlee.com/pytest-mock/
+		* https://nedbatchelder.com/blog/201908/why_your_mock_doesnt_work.html
+	* At least 80% coverage
+		* https://coverage.readthedocs.io/en/6.4.2/
             
             
 ### Docker Requirements
@@ -151,10 +151,10 @@ IoT application example on it
          * coverage report [...]
        * fails if test coverage is below 80%
    * development
-       * will start Flask server in debug mode
-         * flask --debug run --host=0.0.0.0
+    * will start Flask server in debug mode
+     * flask --debug run --host=0.0.0.0
    * production
-       * will start Flask server without debug mode
+    * will start Flask server without debug mode
 
 
 
