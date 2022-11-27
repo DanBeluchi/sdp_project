@@ -32,9 +32,9 @@ DevOps methods
 application lifecycle of IoT solutions
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    <a href="https://github.com/DanBeluchi/sdp_project/issues">Report Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+    <a href="https://github.com/DanBeluchi/sdp_project/issues">Request Feature</a>
   </p>
 </div>
 
