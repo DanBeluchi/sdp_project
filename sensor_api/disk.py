@@ -1,5 +1,9 @@
+from flask import Blueprint
 import shutil
 
+disk = Blueprint("disk", __name__, url_prefix="/disk")
+
+@disk.route("/usage")
 def disk_usage():
     """
     This function provides disk usage information of the root partition.
@@ -8,5 +12,5 @@ def disk_usage():
     
     disk_object = shutil.disk_usage("/")
     
-    return disk_object.used
+    return str(disk_object.used)
     
