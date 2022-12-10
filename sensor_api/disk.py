@@ -13,4 +13,3 @@ def disk_usage():
     disk_object = shutil.disk_usage("/")
     
     return str(disk_object.used)
-    
