@@ -7,7 +7,7 @@ disk = Blueprint("disk", __name__, url_prefix="/disk")
 def disk_usage():
     """
     This function provides disk usage information of the root partition.
-    Returns usage in bytes.
+    Returns usage in bytes. Return type of string.
     """
     
     disk_object = shutil.disk_usage("/")
