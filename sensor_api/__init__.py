@@ -2,7 +2,7 @@ import os
 
 from flask import Flask
 from . import disk
-
+from . import cpu
 
 def create_app(test_config=None):
     # create and configure the app
@@ -33,5 +33,8 @@ def create_app(test_config=None):
     
     # Register disk usage 
     app.register_blueprint(disk.disk)   
+
+    # register cpu temp
+    app.register_blueprint(cpu.cpu)
 
     return app
