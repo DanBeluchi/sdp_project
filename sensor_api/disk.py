@@ -1,5 +1,5 @@
 from flask import Blueprint
-import shutil
+from gpiozero import DiskUsage
 
 disk = Blueprint("disk", __name__, url_prefix="/disk")
 
@@ -7,9 +7,9 @@ disk = Blueprint("disk", __name__, url_prefix="/disk")
 def disk_usage():
     """
     This function provides disk usage information of the root partition.
-    Returns usage in bytes. Return type of string.
+    Returns usage in percent
     """
     
-    disk_object = shutil.disk_usage("/")
+    disk = DiskUsage()
     
-    return str(disk_object.used)
+    return 'Current disk usage: {}%'.format(disk.usage)

@@ -1,4 +1,8 @@
-from ..sensor_api import disk
+import sys
+
+sys.path.insert(1, './sensor_api')
+
+import disk
 
 def test_disk_usage_type_str():
     """
