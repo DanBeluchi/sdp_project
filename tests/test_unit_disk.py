@@ -1,19 +1,34 @@
-import sys
+"""
+Unit tests for disk usage.
+"""
 
-sys.path.insert(1, './sensor_api')
+# yapf: disable
+import sys  # nopep8
 
-import disk
+sys.path.insert(1, './sensor_api')  # nopep8
+# yapf: enable
 
-def test_disk_usage_type_str():
+# pylint: disable=C0413
+import pytest
+# pylint: disable=E0401
+import disk  # type: ignore
+# pylint: enable=E0401
+# pylint: enable=C0413
+
+
+@pytest.mark.unittest
+def test_disk_usage_not_null():
     """
-    Test if the return type is string.
+    Test that return object is not null.
     """
-    value = disk.disk_usage()
-    assert isinstance(value, str)
+    value = disk.disk_usage_in_percent()
+    assert value != 0
 
-def test_disk_usage_not_empty():
+
+@pytest.mark.unittest
+def test_disk_usage_str_not_empty():
     """
     Test that return object is not empty.
     """
-    value = disk.disk_usage()
+    value = disk.disk_usage_str()
     assert value != ""

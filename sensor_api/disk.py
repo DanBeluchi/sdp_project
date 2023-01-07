@@ -1,5 +1,5 @@
 """
-Shutil lib used to get disk information.
+Get disk usage informations.
 """
 import shutil
 from flask import Blueprint
