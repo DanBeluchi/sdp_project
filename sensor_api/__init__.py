@@ -3,11 +3,12 @@ import os
 from flask import Flask
 from . import disk
 from . import cpu
+from . import cpu_error
 
 def create_app(test_config=None):
     # create and configure the app
-    app = Flask(__name__, instance_relative_config=True) 
-    
+    app = Flask(__name__, instance_relative_config=True)
+
     app.config.from_mapping(
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
@@ -30,9 +31,16 @@ def create_app(test_config=None):
     @app.route('/hello')
     def hello():
         return 'Hello, World!'
-    
-    # Register disk usage 
-    app.register_blueprint(disk.disk)   
+
+    # Register disk usage
+    app.register_blueprint(disk.disk)
+
+    # register cpu temp
+    app.register_blueprint(cpu.cpu)
+
+    # register cpu error
+    app.register_blueprint(cpu_error.cpu_error)
+
 
     # register cpu temp
     app.register_blueprint(cpu.cpu)
