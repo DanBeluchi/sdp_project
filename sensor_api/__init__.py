@@ -5,6 +5,7 @@ from . import disk
 from . import cpu
 from . import cpu_error
 
+
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
@@ -40,9 +41,5 @@ def create_app(test_config=None):
 
     # register cpu error
     app.register_blueprint(cpu_error.cpu_error)
-
-
-    # register cpu temp
-    app.register_blueprint(cpu.cpu)
 
     return app
