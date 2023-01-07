@@ -1,3 +1,7 @@
+"""
+This module provides cpu temperature information.
+"""
+
 from flask import Blueprint
 from gpiozero import CPUTemperature
 
@@ -11,7 +15,6 @@ def cpu_temp():
     Returns temperature in celsius. Return type of float.
     '''
 
-    cpu = CPUTemperature()
+    cpu_objc = CPUTemperature()
 
-
-    return str(cpu.temperature)
+    return str(cpu_objc.temperature)
