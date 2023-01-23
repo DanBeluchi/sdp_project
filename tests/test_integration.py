@@ -21,7 +21,10 @@ def test_client():
     '''
     Create test client.
     '''
-    _flask_app = flask_app.create_app('flask_test.cfg')
+    _flask_app = flask_app.create_app()
+    _flask_app.config.update({
+        "TESTING": True,
+    })
 
     testing_client = _flask_app.test_client()
 
@@ -40,7 +43,7 @@ def test_get_disk_usage_check_redirect(test_client):
     """
     Test that there was one redirect response.
     """
-    response = test_client.get("/")
+    response = test_client.get("/disk/usage")
     assert response.status_code == 200
 
 
