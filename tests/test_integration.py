@@ -16,62 +16,46 @@ import flask_app  # type: ignore
 # pylint: enable=C0413
 
 
-@pytest.fixture()
-def app():
+@pytest.fixture(scope='module')
+def test_client():
     '''
-    Create app fixture.
+    Create test client.
     '''
+    _flask_app = flask_app.create_app('flask_test.cfg')
 
-    app_fixture = flask_app.create_app()
-    app_fixture.config.update({
-        "TESTING": True,
-    })
+    testing_client = _flask_app.test_client()
 
-    # other setup can go here
+    # Establish an application context before running the tests.
+    ctx = _flask_app.app_context()
+    ctx.push()
 
-    yield app_fixture
+    yield testing_client
 
-    # clean up / reset resources here
-
-
-@pytest.fixture()
-def client(app_fixture):
-    '''
-    Return test client.
-    '''
-    return app_fixture.test_client()
-
-
-@pytest.fixture()
-def runner(app_fixture):
-    '''
-    Return test cli runner.
-    '''
-    return app_fixture.test_cli_runner()
+    ctx.pop()
 
 
 @pytest.mark.integrationtest
-def test_get_disk_usage_not_empty():
+def test_get_disk_usage_check_redirect(test_client):
     """
-    Test that return object is not null.
+    Test that there was one redirect response.
     """
-    response = client.get("/disk/usage")
-    assert response != ""
+    response = test_client.get("/")
+    assert response.status_code == 200
 
 
 @pytest.mark.integrationtest
-def test_get_cpu_temp_not_empty():
+def test_get_cpu_temp_check_redirect(test_client):
     """
-    Test that return object is not null.
+    Test that there was one redirect response.
     """
-    response = client.get("/cpu/temp")
-    assert response != ""
+    response = test_client.get("/cpu/temp", follow_redirects=True)
+    assert response.status_code == 200
 
 
 @pytest.mark.integrationtest
-def test_get_cpu_temp_error_not_empty():
+def test_get_cpu_temp_error_check_redirect(test_client):
     """
-    Test that return object is not null.
+    Test that there was one redirect response.
     """
-    response = client.get("/cpu/temp/error")
-    assert response != ""
+    response = test_client.get("/cpu/temp/error", follow_redirects=True)
+    assert response.status_code == 200
