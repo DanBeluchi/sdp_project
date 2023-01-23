@@ -39,29 +39,38 @@ def test_client():
 
 # pylint: disable=W0621
 @pytest.mark.integrationtest
-def test_get_disk_usage_check_redirect(test_client):
+def test_get_disk_usage_returns_ok(test_client):
     """
-    Test that there was one redirect response.
+    Test status code of the page == 200.
     """
     response = test_client.get("/disk/usage")
     assert response.status_code == 200
 
 
 @pytest.mark.integrationtest
-def test_get_cpu_temp_check_redirect(test_client):
+def test_get_cpu_temp_returns_ok(test_client):
     """
-    Test that there was one redirect response.
+    Test status code of the page == 200.
     """
     response = test_client.get("/cpu/temp", follow_redirects=True)
     assert response.status_code == 200
 
 
 @pytest.mark.integrationtest
-def test_get_cpu_temp_error_check_redirect(test_client):
+def test_get_cpu_temp_error_returns_ok(test_client):
     """
-    Test that there was one redirect response.
+    Test status code of the page == 200.
     """
     response = test_client.get("/cpu/temp/error", follow_redirects=True)
     assert response.status_code == 200
+
+
+@pytest.mark.integrationtest
+def test_get_dummy_returns_fail(test_client):
+    """
+    Test status code of the page != 200.
+    """
+    response = test_client.get("/dummy", follow_redirects=True)
+    assert response.status_code != 200
 
 # pylint: enable=W0621
