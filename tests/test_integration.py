@@ -34,6 +34,7 @@ def test_client():
     ctx.pop()
 
 
+# pylint: disable=W0621
 @pytest.mark.integrationtest
 def test_get_disk_usage_check_redirect(test_client):
     """
@@ -59,3 +60,5 @@ def test_get_cpu_temp_error_check_redirect(test_client):
     """
     response = test_client.get("/cpu/temp/error", follow_redirects=True)
     assert response.status_code == 200
+
+# pylint: enable=W0621
