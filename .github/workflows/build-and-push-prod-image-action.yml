@@ -22,7 +22,7 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         
-    - name: Build and push prod image to docker hub
+    - name: Build and publish prod image to docker hub
       uses: docker/build-push-action@v3
       with:
         context: .
