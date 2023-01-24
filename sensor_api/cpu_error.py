@@ -3,7 +3,7 @@ This module provides information about the cpu temperature.
 """
 
 from flask import Blueprint
-from gpiozero import CPUTemperature
+import psutil
 
 cpu_error = Blueprint("cpu_error", __name__, url_prefix="/cpu/temp")
 
@@ -26,8 +26,6 @@ def cpu_temp_error():
     This function tells the user if the cpu temperature is running too hot.
     '''
 
-    cpu = CPUTemperature()
-
-    temp = cpu.temperature
+    temp = psutil.sensors_temperatures()['cpu_thermal'][0].current
 
     return cpu_temp_error_msg(temp)

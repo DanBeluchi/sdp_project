@@ -17,7 +17,7 @@ import cpu  # type: ignore
 
 
 @pytest.mark.unittest
-def test_disk_usage_str_not_empty():
+def test_cpu_temp_str_not_empty():
     """
     Test that return object is not empty.
     """

@@ -73,4 +73,5 @@ def test_get_dummy_returns_fail(test_client):
     response = test_client.get("/dummy", follow_redirects=True)
     assert response.status_code != 200
 
+
 # pylint: enable=W0621
