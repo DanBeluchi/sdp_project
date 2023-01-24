@@ -15,6 +15,6 @@ def cpu_temp():
     Returns temperature in celsius.
     '''
 
-    temp = psutil.sensors_temperatures()["cpu_thermal"][0]
+    temp = psutil.sensors_temperatures()["cpu-thermal"][0]
 
     return str(temp.current)
