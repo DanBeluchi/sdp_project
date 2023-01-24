@@ -12,17 +12,27 @@ jobs:
     runs-on: ubuntu-latest
     if: ${{ github.event_name == 'pull_request' }}
     steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+        
       - name: Checkout
         uses: actions/checkout@v3
         
-      - name: Build the Docker test image
-        run: docker build . --file /Docker/Dockerfile.test --tag test-image:$(date +%s)
+      - name: Build test image
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./Docker/Dockerfile.test
+          push: false
+          tags: sdpproj/sensorapi:test
         
   build_and_push_dev_image:
-    name: Build & push dev image
     runs-on: ubuntu-latest
     
     steps:
+    - name: Set up QEMU
+      uses: docker/setup-qemu-action@v2
+      
     - name: Checkout
       uses: actions/checkout@v3
       
@@ -32,7 +42,7 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         
-    - name: Build and push dev image
+    - name: Build and push image
       uses: docker/build-push-action@v3
       with:
         context: .
