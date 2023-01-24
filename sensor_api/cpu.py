@@ -12,9 +12,9 @@ cpu = Blueprint("cpu", __name__, url_prefix="/cpu")
 def cpu_temp():
     '''
     This function provides the CPU temperature of the raspberry pi.
-    Returns temperature in celsius. Return type of float.
+    Returns temperature in celsius.
     '''
 
-    temp = psutil.sensors_temperatures()['cpu_thermal'][0].current
+    temp = psutil.sensors_temperatures()["cpu_thermal"][0]
 
-    return str(temp)
+    return str(temp.current)
