@@ -1,0 +1,24 @@
+name: Build Docker test Image CI
+
+on:
+  pull_request:
+    branches: [ "develop" ]
+
+jobs:
+
+  pull_request_ci:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
+        
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Build test image
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          file: ./Docker/Dockerfile.test
+          push: false
+          tags: sdpproj/sensorapi:test
