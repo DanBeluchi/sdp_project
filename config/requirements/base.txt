@@ -9,3 +9,4 @@ Werkzeug==2.2.2
 zipp==3.11.0
 gpiozero==1.6.2
 RPi.GPIO==0.7.1
+psutil==5.9.4
