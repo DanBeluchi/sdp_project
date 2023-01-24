@@ -1,0 +1,47 @@
+FROM arm32v6/python:3.9-alpine AS base
+
+RUN echo "Building base image"
+RUN apk update
+RUN apk add python3-dev \
+            gcc \
+            libc-dev \
+            libffi-dev
+RUN python -m venv /opt/venv
+
+# Make sure we use the virtualenv:
+ENV PATH="/opt/venv/bin:$PATH"
+
+## add and install requirements
+RUN pip install --upgrade pip
+
+## set working directory
+WORKDIR /usr/src/
+
+COPY config/requirements/base.txt .
+
+RUN pip3 install -r base.txt
+
+
+# test stage
+FROM base AS test
+
+RUN echo "Building test image"
+
+COPY --from=base /opt/venv /opt/venv
+
+WORKDIR /usr/src/
+
+COPY config/requirements/test.txt .
+
+RUN pip3 install -r test.txt
+
+# add sensor_api app
+COPY sensor_api/ sensor_api/
+
+# Make sure we use the virtualenv:
+ENV PATH="/opt/venv/bin:$PATH"
+
+RUN flake8 --ignore=E402 
+RUN coverage run -m pytest -v -m unittest
+RUN coverage run -m pytest -v -m integrationtest
+RUN coverage report --fail-under 80
