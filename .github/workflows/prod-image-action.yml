@@ -1,0 +1,41 @@
+name: Docker Prod Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  pull_request_ci:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name == 'pull_request' }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        
+      - name: Build the Docker test image
+        run: docker build . --file /Docker/Dockerfile.test --tag test-image:$(date +%s)
+        
+  build_and_push_dev_image:
+    name: Build & push dev image
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      
+    - name: Log in to Docker Hub
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        
+    - name: Build and push dev image
+      uses: docker/build-push-action@v3
+      with:
+        context: .
+        file: ./Docker/Dockerfile.prod
+        push: true
+        tags: sdpproj/sensorapi:latest
