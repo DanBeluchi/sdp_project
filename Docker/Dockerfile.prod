@@ -1,6 +1,4 @@
 FROM arm32v6/python:3.9-alpine AS base
-
-RUN echo "Building base image"
 RUN apk update
 RUN apk add python3-dev \
             gcc \
@@ -22,8 +20,6 @@ COPY config/requirements/base.txt .
 RUN pip3 install -r base.txt
 
 FROM base AS prod
-
-RUN echo "Building production image"
 
 COPY --from=base /opt/venv /opt/venv
 
