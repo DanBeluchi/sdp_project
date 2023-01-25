@@ -23,7 +23,7 @@ jobs:
         uses: docker/build-push-action@v3
         with:
           context: .
-          platforms: linux/arm/v6, linux/arm/v7
+          platforms: linux/arm/v6
           file: ./Docker/Dockerfile.test
           push: false
           tags: sdpproj/sensorapi:test
