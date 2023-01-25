@@ -26,6 +26,6 @@ def cpu_temp_error():
     This function tells the user if the cpu temperature is running too hot.
     '''
 
-    temp = psutil.sensors_temperatures()['cpu-thermal'][0]
+    temp = psutil.sensors_temperatures()['cpu_thermal'][0]
 
     return cpu_temp_error_msg(temp.current)
