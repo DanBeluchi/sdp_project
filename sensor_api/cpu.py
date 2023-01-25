@@ -3,7 +3,7 @@ This module provides cpu temperature information.
 """
 
 from flask import Blueprint
-from gpiozero import CPUTemperature
+import psutil
 
 cpu = Blueprint("cpu", __name__, url_prefix="/cpu")
 
@@ -12,9 +12,9 @@ cpu = Blueprint("cpu", __name__, url_prefix="/cpu")
 def cpu_temp():
     '''
     This function provides the CPU temperature of the raspberry pi.
-    Returns temperature in celsius. Return type of float.
+    Returns temperature in celsius.
     '''
 
-    cpu_objc = CPUTemperature()
+    temp = psutil.sensors_temperatures()["cpu_thermal"][0]
 
-    return str(cpu_objc.temperature)
+    return str(temp.current)

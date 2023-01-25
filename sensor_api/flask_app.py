@@ -1,13 +1,25 @@
+#!/usr/bin/env python3
+
 """
 Module for creating flask application.
 """
 
-import os
+# yapf: disable
+import sys  # nopep8
+import os  # nopep8
 
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))  # nopep8
+sys.path.append(os.path.dirname(SCRIPT_DIR))  # nopep8
+# yapf: enable
+
+# pylint: disable=C0413
 from flask import Flask
-from . import disk
-from . import cpu
-from . import cpu_error
+# pylint: disable=E0401
+from sensor_api.disk import disk  # type: ignore
+from sensor_api.cpu import cpu  # type: ignore
+from sensor_api.cpu_error import cpu_error  # type: ignore
+# pylint: enable=E0401
+# pylint: enable=C0413
 
 
 def create_app(test_config=None):
@@ -41,12 +53,12 @@ def create_app(test_config=None):
         return 'Hello, World!'
 
     # Register disk usage
-    app.register_blueprint(disk.disk)
+    app.register_blueprint(disk)
 
     # register cpu temp
-    app.register_blueprint(cpu.cpu)
+    app.register_blueprint(cpu)
 
     # register cpu error
-    app.register_blueprint(cpu_error.cpu_error)
+    app.register_blueprint(cpu_error)
 
     return app

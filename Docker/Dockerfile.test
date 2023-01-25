@@ -37,8 +37,10 @@ RUN pip3 install -r test.txt
 
 # add sensor_api app
 COPY sensor_api/ sensor_api/
+COPY tests/ tests/
+COPY pytest.ini .
 
 # Make sure we use the virtualenv:
 ENV PATH="/opt/venv/bin:$PATH"
 
-RUN flake8 --ignore=E402 
+RUN flake8 --ignore=E402

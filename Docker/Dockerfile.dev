@@ -38,4 +38,4 @@ COPY sensor_api/ sensor_api/
 # make sure we use the virtualenv:
 ENV PATH="/opt/venv/bin:$PATH"
 
-CMD ["flask", "--app", "sensor_api","--debug", "run", "--host=0.0.0.0"]
+CMD ["flask", "--app", "sensor_api.flask_app","--debug", "run", "--host=0.0.0.0"]
