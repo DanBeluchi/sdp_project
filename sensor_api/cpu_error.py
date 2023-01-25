@@ -1,5 +1,5 @@
 """
-This module provides information about the cpu temperature.
+This module provides information about the cpu temperature!
 """
 
 from flask import Blueprint
