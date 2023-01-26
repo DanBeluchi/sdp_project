@@ -66,6 +66,8 @@ application lifecycle of IoT solutions
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+![scr](https://user-images.githubusercontent.com/47921292/214816019-0c745dfb-86d6-4438-84cf-9f136508cb4f.png)
+
 DevOps platform to plan and implement a concrete IoT application example. This project consists of a Flask application running on a Raspberry Pi Zero which provides the following endpoints
 
 * /cpu/temp: Current CPU temperature in Celsius
