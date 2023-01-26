@@ -14,13 +14,6 @@ ENV PATH="/opt/venv/bin:$PATH"
 ## add and install requirements
 RUN pip install --upgrade pip
 
-## set working directory
-WORKDIR /usr/src/
-
-COPY config/requirements/base.txt .
-
-RUN pip3 install -r base.txt
-
 
 # test stage
 FROM base AS test
@@ -28,6 +21,9 @@ FROM base AS test
 RUN echo "Building test image"
 
 COPY --from=base /opt/venv /opt/venv
+
+# Make sure we use the virtualenv:
+ENV PATH="/opt/venv/bin:$PATH"
 
 WORKDIR /usr/src/
 
@@ -40,7 +36,5 @@ COPY sensor_api/ sensor_api/
 COPY tests/ tests/
 COPY pytest.ini .
 
-# Make sure we use the virtualenv:
-ENV PATH="/opt/venv/bin:$PATH"
 
 RUN flake8 --ignore=E402
