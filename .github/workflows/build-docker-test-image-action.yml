@@ -1,29 +1,29 @@
 name: Build Docker test Image CI
 
-on:
+on:    
   pull_request:
-    branches: [ "develop" ]
+    branches:
+      - master
+      - develop
+  push:
+    branches:
+      - 'feature/**'
 
 jobs:
 
   pull_request_ci:
     runs-on: ubuntu-latest
     steps:
-#      - uses: pguyot/arm-runner-action@v2
-#        id: build_image
-#        with:
-#         base_image: dietpi:rpi_armv6_bullseye
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v2
-
       - name: Checkout
         uses: actions/checkout@v3
+              
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v2
         
       - name: Build test image
         uses: docker/build-push-action@v3
         with:
           context: .
-          platforms: linux/arm/v6
           file: ./Docker/Dockerfile.test
           push: false
           tags: sdpproj/sensorapi:test
