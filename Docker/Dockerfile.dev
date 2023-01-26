@@ -26,6 +26,7 @@ ENV PATH="/opt/venv/bin:$PATH"
 
 WORKDIR /usr/src/
 
+COPY config/requirements/base.txt .
 COPY config/requirements/dev.txt .
 
 RUN pip3 install -r dev.txt
