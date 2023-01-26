@@ -6,20 +6,13 @@ RUN apk add python3-dev \
             gcc \
             libc-dev \
             libffi-dev
-RUN python -m venv /opt/venv
+RUN python3 -m venv /opt/venv
 
 # Make sure we use the virtualenv:
 ENV PATH="/opt/venv/bin:$PATH"
 
 ## add and install requirements
-RUN pip install --upgrade pip
-
-## set working directory
-WORKDIR /usr/src/
-
-COPY config/requirements/base.txt .
-
-RUN pip3 install -r base.txt
+RUN pip3 install --upgrade pip
 
 
 # test stage
@@ -29,16 +22,20 @@ RUN echo "Building test image"
 
 COPY --from=base /opt/venv /opt/venv
 
+# Make sure we use the virtualenv:
+ENV PATH="/opt/venv/bin:$PATH"
+
 WORKDIR /usr/src/
 
+COPY config/requirements/base.txt .
 COPY config/requirements/test.txt .
 
 RUN pip3 install -r test.txt
 
 # add sensor_api app
 COPY sensor_api/ sensor_api/
+COPY tests/ tests/
+COPY pytest.ini .
 
-# Make sure we use the virtualenv:
-ENV PATH="/opt/venv/bin:$PATH"
 
-RUN flake8 --ignore=E402 
+RUN flake8 --ignore=E402

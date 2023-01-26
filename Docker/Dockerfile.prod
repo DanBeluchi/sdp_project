@@ -1,37 +1,38 @@
 FROM arm32v6/python:3.9-alpine AS base
+
+RUN echo "Building base image"
 RUN apk update
 RUN apk add python3-dev \
             gcc \
             libc-dev \
             libffi-dev
-RUN python -m venv /opt/venv
+RUN python3 -m venv /opt/venv
 
 # Make sure we use the virtualenv:
 ENV PATH="/opt/venv/bin:$PATH"
 
 ## add and install requirements
-RUN pip install --upgrade pip
-
-## set working directory
-WORKDIR /usr/src/
-
-COPY config/requirements/base.txt .
-
-RUN pip3 install -r base.txt
+RUN pip3 install --upgrade pip
 
 FROM base AS prod
 
 COPY --from=base /opt/venv /opt/venv
 
-EXPOSE 5000
+# Make sure we use the virtualenv:
+ENV PATH="/opt/venv/bin:$PATH"
 
 WORKDIR /usr/src/
+
+COPY config/requirements/base.txt .
+COPY config/requirements/prod.txt .
+
+RUN pip3 install -r prod.txt
+
+EXPOSE 5000
 
 # add sensor_api app
 COPY sensor_api/ sensor_api/
 
-# make sure we use the virtualenv:
-ENV PATH="/opt/venv/bin:$PATH"
 
-CMD ["flask", "--app", "sensor_api", "run", "--host=0.0.0.0"]
+CMD ["flask", "--app", "sensor_api.flask_app", "run", "--host=0.0.0.0"]
 

@@ -6,20 +6,13 @@ RUN apk add python3-dev \
             gcc \
             libc-dev \
             libffi-dev
-RUN python -m venv /opt/venv
+RUN python3 -m venv /opt/venv
 
 # Make sure we use the virtualenv:
 ENV PATH="/opt/venv/bin:$PATH"
 
 ## add and install requirements
-RUN pip install --upgrade pip
-
-## set working directory
-WORKDIR /usr/src/
-
-COPY config/requirements/base.txt .
-
-RUN pip3 install -r base.txt
+RUN pip3 install --upgrade pip
 
 # develop stage
 FROM base AS dev
@@ -28,14 +21,20 @@ RUN echo "Building development image"
 
 COPY --from=base /opt/venv /opt/venv
 
-EXPOSE 5000
+# Make sure we use the virtualenv:
+ENV PATH="/opt/venv/bin:$PATH"
 
 WORKDIR /usr/src/
+
+COPY config/requirements/base.txt .
+COPY config/requirements/dev.txt .
+
+RUN pip3 install -r dev.txt
+
+EXPOSE 5000
 
 # add sensor_api app
 COPY sensor_api/ sensor_api/
 
-# make sure we use the virtualenv:
-ENV PATH="/opt/venv/bin:$PATH"
 
-CMD ["flask", "--app", "sensor_api","--debug", "run", "--host=0.0.0.0"]
+CMD ["flask", "--app", "sensor_api.flask_app","--debug", "run", "--host=0.0.0.0"]
