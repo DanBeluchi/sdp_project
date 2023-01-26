@@ -6,13 +6,13 @@ RUN apk add python3-dev \
             gcc \
             libc-dev \
             libffi-dev
-RUN python -m venv /opt/venv
+RUN python3 -m venv /opt/venv
 
 # Make sure we use the virtualenv:
 ENV PATH="/opt/venv/bin:$PATH"
 
 ## add and install requirements
-RUN pip install --upgrade pip
+RUN pip3 install --upgrade pip
 
 
 # test stage
